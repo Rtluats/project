@@ -10,7 +10,8 @@ class User(AbstractUser):
         RESTAURANT = 2, "Restaurant"
     role = models.PositiveSmallIntegerField(choices=Role.choices, default=Role.CUSTOMER)
     restaurant_name = models.CharField(max_length=300, blank=True)
-    geolocation = map_fields.GeoLocationField(max_length=100)
+    address = map_fields.AddressField(max_length=200)
+    #geolocation = map_fields.GeoLocationField(max_length=100)
 
 
 class CustomerManager(models.Manager):

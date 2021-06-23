@@ -5,7 +5,7 @@ from user_app.models import Customer, Restaurant
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = ['id', 'username', 'password', 'email', 'role', 'first_name', 'last_name']
+        fields = ['id', 'username', 'password', 'email', 'role', 'first_name', 'last_name', 'address']
         extra_kwargs = {
             'password': {'write_only': True}
         }
