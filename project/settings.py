@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'djoser',
+    'django_google_maps',
     'user_app',
     'basket_app',
     'product_app',
@@ -177,3 +178,5 @@ EMAIL_HOST = "stmp.gmail.com"
 EMAIL_HOST_USER = "rtluats"
 EMAIL_HOST_PASSWORD = "Aleks328828"
 EMAIL_PORT = 587
+
+GOOGLE_MAPS_API_KEY = 'AIzaSyAD8jJD-ZPyLii3lTUt5yADsZVSTLLjJtc'

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django_google_maps import fields as map_fields
 # Create your models here.
 
 
@@ -10,6 +10,7 @@ class User(AbstractUser):
         RESTAURANT = 2, "Restaurant"
     role = models.PositiveSmallIntegerField(choices=Role.choices, default=Role.CUSTOMER)
     restaurant_name = models.CharField(max_length=300, blank=True)
+    geolocation = map_fields.GeoLocationField(max_length=100)
 
 
 class CustomerManager(models.Manager):
