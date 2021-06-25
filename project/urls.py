@@ -21,6 +21,8 @@ from user_app.urls import (
 from product_app.urls import product_list, product_detail
 from order_app.urls import order_list, order_detail
 from basket_app.urls import basket_list, basket_detail
+from project.yasg import swagger
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,4 +38,5 @@ urlpatterns = [
     path('api/v1/order/<int:pk>/', order_detail, name='order-detail'),
     path('api/v1/baskets/', basket_list, name='basket_list'),
     path('api/v1/basket/<int:pk>/', basket_detail, name='basket-detail'),
+    swagger,
 ]
