@@ -26,6 +26,10 @@ class Order(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name="restaurant")
     products = models.ManyToManyField(Product)
 
+    @property
+    def owners(self):
+        return [self.restaurant, self.customer]
+
 
 @receiver(signal=pre_save, sender=Order)
 def order_pre_save(sender, instance: Order, *args, **kwargs):
