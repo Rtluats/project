@@ -16,9 +16,9 @@ class RestaurantView(viewsets.mixins.ListModelMixin,
 
     def get_permissions(self):
         if self.action == "create":
-            return [AllowAny,]
+            return [AllowAny(),]
         else:
-            return [IsOwnerOrReadOnly,]
+            return [IsOwnerOrReadOnly(),]
 
 
 class CustomerView(viewsets.mixins.ListModelMixin,
@@ -32,6 +32,6 @@ class CustomerView(viewsets.mixins.ListModelMixin,
 
     def get_permissions(self):
         if self.action == "create":
-            return [AllowAny,]
+            return [AllowAny(),]
         else:
-            return [IsOwnerOrReadOnly,]
+            return [IsOwnerOrReadOnly(),]

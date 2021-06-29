@@ -13,6 +13,10 @@ class User(AbstractUser):
     address = map_fields.AddressField(max_length=200)
     #geolocation = map_fields.GeoLocationField(max_length=100)
 
+    @property
+    def owner(self):
+        return self
+
 
 class CustomerManager(models.Manager):
     def get_queryset(self, *args, **kwargs):
