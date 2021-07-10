@@ -8,10 +8,12 @@ class User(AbstractUser):
     class Role(models.IntegerChoices):
         CUSTOMER = 1, "Customer"
         RESTAURANT = 2, "Restaurant"
+        COURIER = 3, "Courier"
     role = models.PositiveSmallIntegerField(choices=Role.choices, default=Role.CUSTOMER)
     restaurant_name = models.CharField(max_length=300, blank=True)
     address = map_fields.AddressField(max_length=200)
-    #geolocation = map_fields.GeoLocationField(max_length=100)
+    geolocation = map_fields.GeoLocationField(max_length=100)
+    is_courier_free = models.BooleanField(default=False)
 
     @property
     def owner(self):
@@ -49,4 +51,22 @@ class Restaurant(User):
     def save(self, *args, **kwargs):
         if not self.pk:
             self.role = User.Role.RESTAURANT
+        return super().save(*args, **kwargs)
+
+
+class CourierManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(role=User.Role.COURIER)
+
+
+class Courier(User):
+    objects = CourierManager()
+
+    class Meta:
+        proxy = True
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.role = User.Role.COURIER
+            self.is_courier_free = True
         return super().save(*args, **kwargs)

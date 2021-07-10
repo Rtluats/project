@@ -69,7 +69,7 @@ def order_post_save(sender, instance, created, update_fields, *args, **kwargs):
         common.delay(url_on_order, instance.restaurant.email, "Заказ принят")
     else:
         if "status" in update_fields:
-            common.delay(url_on_order, instance.customer.email, f"Новый статус:{update_fields['status']}")
+            common.delay(url_on_order, instance.customer.email, f"Новый статус:{Order.Status.choices[update_fields['status']][1]}")
         if "is_canceled" in update_fields:
             common.delay(url_on_order, instance.customer.email, "Заказ отменён")
             common.delay(url_on_order, instance.restaurant.email, "Заказ отменён")
