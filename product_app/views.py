@@ -1,26 +1,16 @@
-from rest_framework import viewsets
 from product_app.models import Stock, Product
 from product_app.serializer import StockSerializer, ProductSerializer
 from service_app.permissions import IsOwnerOrReadOnly
+from service_app.base_classes import BaseView
 
 
-class StockView(viewsets.mixins.ListModelMixin,
-                viewsets.mixins.RetrieveModelMixin,
-                viewsets.mixins.CreateModelMixin,
-                viewsets.mixins.UpdateModelMixin,
-                viewsets.mixins.DestroyModelMixin,
-                viewsets.GenericViewSet):
+class StockView(BaseView):
     serializer_class = StockSerializer
     queryset = Stock.objects.all()
     permission_classes = [IsOwnerOrReadOnly,]
 
 
-class ProductView(viewsets.mixins.ListModelMixin,
-                  viewsets.mixins.RetrieveModelMixin,
-                  viewsets.mixins.CreateModelMixin,
-                  viewsets.mixins.UpdateModelMixin,
-                  viewsets.mixins.DestroyModelMixin,
-                  viewsets.GenericViewSet):
+class ProductView(BaseView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
     permission_classes = [IsOwnerOrReadOnly,]

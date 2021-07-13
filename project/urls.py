@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from user_app.urls import (
-    restaurant_list, restaurant_detail, customer_list, customer_detail
+    restaurant_list, restaurant_detail, customer_list, customer_detail, courier_list, courier_detail
 )
 from product_app.urls import product_list, product_detail
 from order_app.urls import order_list, order_detail
@@ -38,5 +38,7 @@ urlpatterns = [
     path('api/v1/order/<int:pk>/', order_detail, name='order-detail'),
     path('api/v1/baskets/', basket_list, name='basket_list'),
     path('api/v1/basket/<int:pk>/', basket_detail, name='basket-detail'),
+    path('api/v1/couriers/', courier_list, name='courier_list'),
+    path('api/v1/courier/<int:pk>/', courier_detail, name='courier-detail'),
     swagger,
 ]

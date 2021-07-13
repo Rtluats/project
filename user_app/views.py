@@ -1,16 +1,11 @@
-from rest_framework import viewsets
 from user_app.models import Restaurant, Customer, Courier
 from user_app.serializer import RestaurantSerializer, CustomerSerializer, CourierSerializer
 from rest_framework.permissions import AllowAny
 from service_app.permissions import IsOwnerOrReadOnly
+from service_app.base_classes import BaseView
 
 
-class RestaurantView(viewsets.mixins.ListModelMixin,
-                     viewsets.mixins.RetrieveModelMixin,
-                     viewsets.mixins.CreateModelMixin,
-                     viewsets.mixins.UpdateModelMixin,
-                     viewsets.mixins.DestroyModelMixin,
-                     viewsets.GenericViewSet):
+class RestaurantView(BaseView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
 
@@ -21,12 +16,7 @@ class RestaurantView(viewsets.mixins.ListModelMixin,
             return [IsOwnerOrReadOnly(),]
 
 
-class CustomerView(viewsets.mixins.ListModelMixin,
-                   viewsets.mixins.RetrieveModelMixin,
-                   viewsets.mixins.CreateModelMixin,
-                   viewsets.mixins.UpdateModelMixin,
-                   viewsets.mixins.DestroyModelMixin,
-                   viewsets.GenericViewSet):
+class CustomerView(BaseView):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
 
@@ -37,12 +27,7 @@ class CustomerView(viewsets.mixins.ListModelMixin,
             return [IsOwnerOrReadOnly(),]
 
 
-class CourierView(viewsets.mixins.ListModelMixin,
-                  viewsets.mixins.RetrieveModelMixin,
-                  viewsets.mixins.CreateModelMixin,
-                  viewsets.mixins.UpdateModelMixin,
-                  viewsets.mixins.DestroyModelMixin,
-                  viewsets.GenericViewSet):
+class CourierView(BaseView):
     queryset = Courier.objects.all()
     serializer_class = CourierSerializer
 

@@ -1,6 +1,6 @@
 from django.db import models
 from basket_app.models import Basket
-from user_app.models import Customer, Restaurant
+from user_app.models import Customer, Restaurant, Courier
 from product_app.models import Product
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
@@ -25,6 +25,7 @@ class Order(models.Model):
     is_canceled = models.BooleanField(default=False)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name="restaurant")
     products = models.ManyToManyField(Product)
+    courier = models.ForeignKey(Courier, on_delete=models.CASCADE, related_name="courier", null=True)
 
     @property
     def owners(self):
