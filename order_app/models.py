@@ -18,14 +18,11 @@ class Order(models.Model):
         DELIVERED = 4, "Delivered"
 
     status = models.PositiveSmallIntegerField(choices=Status.choices, default=Status.WAIT)
-    basket = models.ForeignKey(Basket, on_delete=models.CASCADE)
     end_price = models.DecimalField(max_digits=5, decimal_places=2)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="customer")
-    is_finished = models.BooleanField(default=False)
     is_canceled = models.BooleanField(default=False)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name="restaurant")
     products = models.ManyToManyField(Product)
-    courier = models.ForeignKey(Courier, on_delete=models.CASCADE, related_name="courier", null=True)
 
     @property
     def owners(self):
@@ -34,9 +31,10 @@ class Order(models.Model):
 
 @receiver(signal=pre_save, sender=Order)
 def order_pre_save(sender, instance: Order, *args, **kwargs):
+    """this method is necessary in order to divide the products by restaurants and form an order for the customer"""
     if instance.id is None:
         restaurant_products = {}
-        for product in instance.basket.products.all():
+        for product in instance.products.all():
             if product.restaurant not in restaurant_products.keys():
                 restaurant_products[product.restaurant] = [product]
             else:
@@ -44,7 +42,6 @@ def order_pre_save(sender, instance: Order, *args, **kwargs):
         for restaurant in restaurant_products.keys():
             products = restaurant_products[restaurant]
             order = Order()
-            order.basket = instance.basket
             order.restaurant = restaurant
             order.products = copy.deepcopy(products)
             order.customer = instance.customer

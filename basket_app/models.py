@@ -7,7 +7,6 @@ from product_app.models import Product
 class Basket(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)
-    is_finished = models.BooleanField(default=False)
 
     @property
     def owner(self):

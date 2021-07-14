@@ -12,9 +12,11 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Basket',
+            name='Complaint',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('message', models.TextField(max_length=512)),
+                ('datetime_created', models.DateTimeField()),
             ],
         ),
     ]
