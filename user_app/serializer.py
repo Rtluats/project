@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from user_app.models import Customer, Restaurant, Courier
+
+from user_app.models import Courier, Customer, Restaurant
 
 
 class BaseSerializer(serializers.ModelSerializer):

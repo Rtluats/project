@@ -1,6 +1,5 @@
 from order_app.views import OrderView
 
-
 order_list = OrderView.as_view({
     'get': 'list',
     'post': 'create',

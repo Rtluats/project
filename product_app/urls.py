@@ -1,6 +1,5 @@
 from product_app.views import ProductView, StockView
 
-
 product_list = ProductView.as_view({
     'get': 'list',
     'post': 'create',

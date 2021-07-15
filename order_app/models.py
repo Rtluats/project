@@ -1,13 +1,15 @@
-from django.db import models
-from basket_app.models import Basket
-from user_app.models import Customer, Restaurant, Courier
-from product_app.models import Product
-from django.db.models.signals import pre_save, post_save
-from django.dispatch import receiver
-from service_app.email_tasks import common
-from django.urls import reverse
-import copy
 import collections
+import copy
+
+from django.db import models
+from django.db.models.signals import post_save, pre_save
+from django.dispatch import receiver
+from django.urls import reverse
+
+from basket_app.models import Basket
+from product_app.models import Product
+from service_app.email_tasks import common
+from user_app.models import Courier, Customer, Restaurant
 
 
 class Order(models.Model):

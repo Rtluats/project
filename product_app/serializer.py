@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from product_app.models import Stock, Product
+
+from product_app.models import Product, Stock
 from user_app.serializer import RestaurantSerializer
 
 

@@ -1,7 +1,8 @@
 from rest_framework import serializers
+
 from basket_app.models import Basket
-from user_app.serializer import CustomerSerializer
 from product_app.serializer import ProductSerializer
+from user_app.serializer import CustomerSerializer
 
 
 class BasketSerializer(serializers.ModelSerializer):

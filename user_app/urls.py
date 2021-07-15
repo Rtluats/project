@@ -1,5 +1,4 @@
-from user_app.views import RestaurantView, CustomerView, CourierView
-
+from user_app.views import CourierView, CustomerView, RestaurantView
 
 restaurant_list = RestaurantView.as_view({
     'get': 'list',

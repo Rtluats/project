@@ -1,8 +1,10 @@
-from user_app.models import Restaurant, Customer, Courier
-from user_app.serializer import RestaurantSerializer, CustomerSerializer, CourierSerializer
 from rest_framework.permissions import AllowAny
-from service_app.permissions import IsOwnerOrReadOnly
+
 from service_app.base_classes import BaseView
+from service_app.permissions import IsOwnerOrReadOnly
+from user_app.models import Courier, Customer, Restaurant
+from user_app.serializer import (CourierSerializer, CustomerSerializer,
+                                 RestaurantSerializer)
 
 
 class RestaurantView(BaseView):

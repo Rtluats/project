@@ -1,6 +1,5 @@
 from basket_app.views import BasketView
 
-
 basket_list = BasketView.as_view({
     'get': 'list',
     'post': 'create',

@@ -1,12 +1,14 @@
+import datetime
+
 from django.db import models
-from order_app.models import Order
-from user_app.models import Courier
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from service_app.email_tasks import common
 from django.urls import reverse
+
 from complaint_app.models import Complaint
-import datetime
+from order_app.models import Order
+from service_app.email_tasks import common
+from user_app.models import Courier
 
 
 class Deliver(models.Model):

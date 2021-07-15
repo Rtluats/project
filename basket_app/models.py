@@ -1,7 +1,7 @@
 from django.db import models
-from user_app.models import Customer
+
 from product_app.models import Product
-# Create your models here.
+from user_app.models import Customer
 
 
 class Basket(models.Model):

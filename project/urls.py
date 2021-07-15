@@ -14,15 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from user_app.urls import (
-    restaurant_list, restaurant_detail, customer_list, customer_detail, courier_list, courier_detail
-)
-from product_app.urls import product_list, product_detail
-from order_app.urls import order_list, order_detail
-from basket_app.urls import basket_list, basket_detail
-from project.yasg import swagger
+from django.urls import include, path
 
+from basket_app.urls import basket_detail, basket_list
+from order_app.urls import order_detail, order_list
+from product_app.urls import product_detail, product_list
+from project.yasg import swagger
+from user_app.urls import (courier_detail, courier_list, customer_detail,
+                           customer_list, restaurant_detail, restaurant_list)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
