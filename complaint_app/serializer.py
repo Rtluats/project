@@ -1,12 +1,14 @@
 from rest_framework import serializers
 
 from complaint_app.models import Complaint
-from deliver_app.serializer import DeliverSerializer
+from order_app.serializer import OrderSerializer
+from user_app.serializer import CourierSerializer
 
 
 class ComplaintSerializer(serializers.ModelSerializer):
     class Meta:
         model = Complaint
-        fields = ['id', 'deliver', 'message', 'datetime_created']
+        fields = ['id', 'order', 'courier', 'message', 'datetime_created']
 
-    deliver = DeliverSerializer(many=False)
+    order = OrderSerializer(many=False)
+    courier = CourierSerializer(many=False)
