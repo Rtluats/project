@@ -5,7 +5,7 @@ services:
     build: .
     container_name: django
     env_file:
-      - .env.django
+      - .env.dev
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/usr/src/project/
@@ -16,6 +16,8 @@ services:
       - redis
   celery:
     build: .
+    env_file:
+      - .env.dev
     command: celery -A project worker -l INFO
     volumes:
       - .:/usr/src/project
