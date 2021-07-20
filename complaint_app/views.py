@@ -1,10 +1,10 @@
 from complaint_app.models import Complaint
 from complaint_app.serializer import ComplaintSerializer
-from service_app.base_classes import BaseView
+from rest_framework.viewsets import ModelViewSet
 from service_app.permissions import CustomersPermission
 
 
-class ComplaintView(BaseView):
+class ComplaintView(ModelViewSet):
     serializer_class = ComplaintSerializer
     queryset = Complaint.objects.all()
     permission_classes = [CustomersPermission,]

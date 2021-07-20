@@ -2,8 +2,6 @@ from django.db import models
 
 from user_app.models import Restaurant
 
-# Create your models here.
-
 
 class Stock(models.Model):
     code = models.CharField(max_length=300)

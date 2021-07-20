@@ -7,11 +7,11 @@ from user_app.serializer import CustomerSerializer, RestaurantSerializer
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Order
-        fields = ['id', 'status', 'basket', 'end_price', 'customer', 'is_canceled', 'restaurant', 'products']
-
     customer = CustomerSerializer(many=False)
     basket = BasketSerializer(many=False)
     restaurant = RestaurantSerializer(many=False)
     products = ProductSerializer(many=True)
+
+    class Meta:
+        model = Order
+        fields = ('id', 'status', 'basket', 'end_price', 'customer', 'is_canceled', 'restaurant', 'products')

@@ -6,9 +6,9 @@ from user_app.serializer import CourierSerializer
 
 
 class ComplaintSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Complaint
-        fields = ['id', 'order', 'courier', 'message', 'datetime_created']
-
     order = OrderSerializer(many=False)
     courier = CourierSerializer(many=False)
+
+    class Meta:
+        model = Complaint
+        fields = ('id', 'order', 'courier', 'message', 'datetime_created')

@@ -7,13 +7,13 @@ from user_app.serializer import RestaurantSerializer
 class StockSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stock
-        fields = ['id', 'code', 'description']
+        fields = ('id', 'code', 'description')
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = ['id', 'description', 'weight', 'price', 'discount', 'stocks', 'restaurant']
-
     stocks = StockSerializer(many=True)
     restaurant = RestaurantSerializer(many=False)
+
+    class Meta:
+        model = Product
+        fields = ('id', 'description', 'weight', 'price', 'discount', 'stocks', 'restaurant')

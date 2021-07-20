@@ -25,24 +25,15 @@ class CustomerSerializer(BaseSerializer):
     class Meta:
         model = Customer
         fields = ['id', 'username', 'password', 'email', 'role', 'first_name', 'last_name', 'address', 'geolocation']
-        extra_kwargs = {
-            'password': {'write_only': True}
-        }
 
 
 class RestaurantSerializer(BaseSerializer):
     class Meta:
         model = Restaurant
         fields = ['id', 'username', 'password', 'email', 'role', 'restaurant_name', 'address', 'geolocation']
-        extra_kwargs = {
-            'password': {'write_only': True}
-        }
 
 
 class CourierSerializer(BaseSerializer):
     class Meta:
         model = Courier
         fields = ['id', 'username', 'password', 'email', 'role', 'first_name', 'last_name', 'is_courier_free']
-        extra_kwargs = {
-            'password': {'write_only': True}
-        }

@@ -6,9 +6,9 @@ from user_app.serializer import CourierSerializer
 
 
 class DeliverSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Deliver
-        fields = ['id', 'order', 'courier', 'is_finished']
-
     order = OrderSerializer(many=False)
     courier = CourierSerializer(many=False)
+
+    class Meta:
+        model = Deliver
+        fields = ('id', 'order', 'courier', 'is_finished')
