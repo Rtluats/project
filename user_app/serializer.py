@@ -24,16 +24,16 @@ class CustomerSerializer(BaseSerializer):
 
     class Meta:
         model = Customer
-        fields = ['id', 'username', 'password', 'email', 'role', 'first_name', 'last_name', 'address', 'geolocation']
+        fields = ('id', 'username', 'password', 'email', 'role', 'first_name', 'last_name', 'address', 'geolocation')
 
 
 class RestaurantSerializer(BaseSerializer):
     class Meta:
         model = Restaurant
-        fields = ['id', 'username', 'password', 'email', 'role', 'restaurant_name', 'address', 'geolocation']
+        fields = ('id', 'username', 'password', 'email', 'role', 'restaurant_name', 'address', 'geolocation')
 
 
 class CourierSerializer(BaseSerializer):
     class Meta:
         model = Courier
-        fields = ['id', 'username', 'password', 'email', 'role', 'first_name', 'last_name', 'is_courier_free']
+        fields = ('id', 'username', 'password', 'email', 'role', 'first_name', 'last_name', 'is_courier_free')

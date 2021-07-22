@@ -8,3 +8,4 @@ djoser==2.1.0
 djangorestframework==3.12.4
 django-google-maps==0.12.4
 drf-yasg==1.20.0
+mixer==7.1.2
