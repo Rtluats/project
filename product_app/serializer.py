@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
 from product_app.models import Product, Stock
-from user_app.serializer import RestaurantSerializer
 
 
 class StockSerializer(serializers.ModelSerializer):
@@ -11,8 +10,6 @@ class StockSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    stocks = StockSerializer(many=True)
-    restaurant = RestaurantSerializer(many=False)
 
     class Meta:
         model = Product

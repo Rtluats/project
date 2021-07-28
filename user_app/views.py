@@ -1,5 +1,6 @@
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import ModelViewSet
+
 from service_app.permissions import IsOwnerOrReadOnly
 from user_app.models import Courier, Customer, Restaurant
 from user_app.serializer import (CourierSerializer, CustomerSerializer,
@@ -12,9 +13,9 @@ class RestaurantView(ModelViewSet):
 
     def get_permissions(self):
         if self.action == "create":
-            return [AllowAny(),]
+            return (AllowAny(),)
         else:
-            return [IsOwnerOrReadOnly(),]
+            return (IsOwnerOrReadOnly(),)
 
 
 class CustomerView(ModelViewSet):
@@ -23,8 +24,8 @@ class CustomerView(ModelViewSet):
 
     def get_permissions(self):
         if self.action == "create":
-            return [AllowAny(),]
-        return [IsOwnerOrReadOnly(),]
+            return (AllowAny(),)
+        return (IsOwnerOrReadOnly(),)
 
 
 class CourierView(ModelViewSet):
@@ -33,5 +34,5 @@ class CourierView(ModelViewSet):
 
     def get_permissions(self):
         if self.action == "create":
-            return [AllowAny(),]
-        return [IsOwnerOrReadOnly(),]
+            return (AllowAny(),)
+        return (IsOwnerOrReadOnly(),)

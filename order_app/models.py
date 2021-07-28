@@ -31,34 +31,32 @@ class Order(models.Model):
         return [self.restaurant, self.customer]
 
 
-@receiver(signal=pre_save, sender=Order)
-def order_pre_save(sender, instance: Order, *args, **kwargs):
-    """this method is necessary in order to divide the products by restaurants and form an order for the customer"""
-    if instance.id is None:
-        restaurant_products = {}
-        for product in instance.products.all():
-            if product.restaurant not in restaurant_products.keys():
-                restaurant_products[product.restaurant] = [product]
-            else:
-                restaurant_products[product.restaurant].append(product)
-        for restaurant in restaurant_products.keys():
-            products = restaurant_products[restaurant]
-            order = Order()
-            order.restaurant = restaurant
-            order.products = copy.deepcopy(products)
-            order.customer = instance.customer
-            products_count = collections.Counter()
-            for product in products:
-                products_count[product] += 1
-            full_price = 0.0
-            discount = 0.0
-            for product in products_count.keys():
-                for stock in product.stocks.all():
-                    if stock.code == "1+1" and products_count[product] > 1:
-                        discount += product.price - product.price * product.discount
-                full_price += (product.price - product.price * product.discount) * products_count[product]
-            order.end_price = full_price - discount
-            order.save()
+# @receiver(signal=pre_save, sender=Order)
+# def order_pre_save(sender, instance: Order,  *args, **kwargs):
+#
+#     if instance.id is None:
+#         restaurant_products = {}
+#         for product in Basket.objects.get(customer=instance.customer).products.all():
+#             if product.restaurant not in restaurant_products.keys():
+#                 restaurant_products[product.restaurant] = [product]
+#             else:
+#                 restaurant_products[product.restaurant].append(product)
+#         for restaurant in restaurant_products.keys():
+#             products = restaurant_products[restaurant]
+#             order = Order.objects.create(customer=instance.customer, restaurant=restaurant)
+#             order.products.set(products)
+#             products_count = collections.Counter()
+#             for product in products:
+#                 products_count[product] += 1
+#             full_price = 0.0
+#             discount = 0.0
+#             for product in products_count.keys():
+#                 for stock in product.stocks.all():
+#                     if stock.code == "1+1" and products_count[product] > 1:
+#                         discount += product.price - product.price * product.discount
+#                 full_price += (product.price - product.price * product.discount) * products_count[product]
+#             order.end_price = full_price - discount
+#             order.save()
 
 
 @receiver(signal=post_save, sender=Order)
@@ -68,8 +66,9 @@ def order_post_save(sender, instance, created, update_fields, *args, **kwargs):
         common.delay(url_on_order, instance.customer.email, "Заказ принят")
         common.delay(url_on_order, instance.restaurant.email, "Заказ принят")
     else:
-        if "status" in update_fields:
-            common.delay(url_on_order, instance.customer.email, f"Новый статус:{Order.Status.choices[update_fields['status']][1]}")
-        if "is_canceled" in update_fields:
-            common.delay(url_on_order, instance.customer.email, "Заказ отменён")
-            common.delay(url_on_order, instance.restaurant.email, "Заказ отменён")
+        if update_fields is not None:
+            if "status" in update_fields:
+                common.delay(url_on_order, instance.customer.email, f"Новый статус:{Order.Status.choices[update_fields['status']][1]}")
+            if "is_canceled" in update_fields:
+                common.delay(url_on_order, instance.customer.email, "Заказ отменён")
+                common.delay(url_on_order, instance.restaurant.email, "Заказ отменён")
